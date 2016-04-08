@@ -1,4 +1,4 @@
-package com.youyicun.menu;
+package com.youyicun.wechat.menu;
 
 /**
  * Created by johnny on 16/4/4.
@@ -14,10 +14,12 @@ public class ViewButton extends Button{
         this.url = url;
     }
 
-    public ViewButton(String type, String name, Button[] sub_button, String url) {
-        super(type, name, sub_button);
+    public ViewButton(String type,String name,String url){
+        super(type,name);
         this.url = url;
     }
+
+
 
     public ViewButton(){}
 }

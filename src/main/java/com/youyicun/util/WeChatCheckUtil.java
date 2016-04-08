@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * Created by johnny on 16/4/4.
  */
-public class CheckUtil {
+public class WeChatCheckUtil {
     private static final String token = "zhuangjingyang";
     public static boolean check(String signature,String timestamp,String nonce){
         String[] arr = new String[]{token,timestamp,nonce};

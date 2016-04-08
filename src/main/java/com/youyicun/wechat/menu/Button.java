@@ -1,4 +1,4 @@
-package com.youyicun.menu;
+package com.youyicun.wechat.menu;
 
 /**
  * Created by johnny on 16/4/4.
@@ -6,7 +6,7 @@ package com.youyicun.menu;
 public class Button {
     private String type;
     private String name;
-    private Button[] sub_button;
+    private Button[] sub_button = {};
 
     public String getType() {
         return type;
@@ -32,11 +32,14 @@ public class Button {
         this.sub_button = sub_button;
     }
 
-    public Button(String type, String name, Button[] sub_button) {
+    public Button(String type, String name) {
         this.type = type;
         this.name = name;
-        this.sub_button = sub_button;
     }
 
     public Button(){}
+
+    public Button(String name){
+        this.name = name;
+    }
 }

@@ -1,4 +1,4 @@
-package com.youyicun.menu;
+package com.youyicun.wechat.menu;
 
 /**
  * Created by johnny on 16/4/4.
