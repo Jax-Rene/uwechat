@@ -2,15 +2,10 @@ package com.youyicun.framework.config;
 
 import com.youyicun.framework.spring.SpringContextHolder;
 import com.youyicun.framework.spring.SpringContextUtils;
-import com.youyicun.framework.spring.SpringPropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.*;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
@@ -30,11 +25,13 @@ import java.util.List;
 
 
 @Configuration
+@EnableAutoConfiguration
 @EnableWebMvc
 @EnableScheduling
+@EnableAsync
 //@PropertySource(ignoreResourceNotFound = true, value = {"classpath:service.properties", "file:d:\\etc\\eagle\\eagle.properties", "file:d:\\etc\\eagle\\service.properties", "file:d:\\etc\\eagle\\eagle-apps\\service.properties"})
 @ComponentScan(basePackages = {"com.youyicun"})
-public class AppsApplicationConfig implements EmbeddedServletContainerCustomizer {
+public class AppsApplicationConfig {
 
     @Bean
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
@@ -70,15 +67,8 @@ public class AppsApplicationConfig implements EmbeddedServletContainerCustomizer
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(AppsApplicationConfig.class,args);
+        SpringApplication.run(AppsApplicationConfig.class, args);
     }
 
 
-
-
-
-    @Override
-    public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
-        configurableEmbeddedServletContainer.setPort(8899);
-    }
 }

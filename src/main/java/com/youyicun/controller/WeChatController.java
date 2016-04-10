@@ -20,7 +20,6 @@ import java.util.Map;
  * Created by johnny on 16/4/4.
  */
 @Controller
-@EnableAutoConfiguration
 public class WeChatController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     @ResponseBody

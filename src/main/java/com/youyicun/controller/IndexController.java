@@ -12,4 +12,12 @@ public class IndexController {
     public String book(){
         return "index";
     }
+
+    @RequestMapping("/message")
+    public String message(){
+        return "message";
+    }
+
+
+
 }
