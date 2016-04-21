@@ -2,10 +2,15 @@ package com.youyicun.framework.config;
 
 import com.youyicun.framework.spring.SpringContextHolder;
 import com.youyicun.framework.spring.SpringContextUtils;
+import com.youyicun.framework.spring.SpringPropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.*;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
@@ -13,8 +18,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
@@ -27,9 +30,6 @@ import java.util.List;
 @Configuration
 @EnableAutoConfiguration
 @EnableWebMvc
-@EnableScheduling
-@EnableAsync
-//@PropertySource(ignoreResourceNotFound = true, value = {"classpath:service.properties", "file:d:\\etc\\eagle\\eagle.properties", "file:d:\\etc\\eagle\\service.properties", "file:d:\\etc\\eagle\\eagle-apps\\service.properties"})
 @ComponentScan(basePackages = {"com.youyicun"})
 public class AppsApplicationConfig {
 
@@ -52,6 +52,22 @@ public class AppsApplicationConfig {
         converters.add(jconfig);
         return converters;
     }
+
+    @Bean
+    public static SpringPropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
+        SpringPropertyPlaceholderConfigurer configurer = new SpringPropertyPlaceholderConfigurer();
+        configurer.setFileEncoding("UTF-8");
+        configurer.setIgnoreResourceNotFound(true);
+        configurer.setSystemPropertiesMode(PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE);
+        configurer.setLocations(
+                new Resource[]{
+                        new FileSystemResource("/Users/johnny/Desktop/JobsAnalysis/analysis.properties"),
+                        new ClassPathResource("database.properties")
+                }
+        );
+        return configurer;
+    }
+
 
     @Bean
     @Qualifier("springContextUtils")

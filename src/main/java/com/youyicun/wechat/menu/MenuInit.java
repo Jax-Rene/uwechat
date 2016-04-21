@@ -3,7 +3,10 @@ package com.youyicun.wechat.menu;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.youyicun.wechat.util.AccessTokenUtil;
 import com.youyicun.wechat.util.HttpClientUtil;
+
+import java.io.IOException;
 import java.io.StringWriter;
+import java.net.URLEncoder;
 import java.util.Map;
 
 /**
@@ -27,9 +30,9 @@ public class MenuInit {
         freeButton.setSub_button(new Button[]{freeActiveButton,wifiButton,vegButton});
 
         Button usButton = new Button("联系我们");
-        ViewButton messageButton = new ViewButton("view", "评价留言", "https://zhuangjingyang.pagekite.me/book");
-        ViewButton introduceButton = new ViewButton("view", "酒店概况", "https://zhuangjingyang.pagekite.me/book");
-        ViewButton joinButton = new ViewButton("view", "加入我们", "https://zhuangjingyang.pagekite.me/book");
+        ViewButton messageButton = new ViewButton("view", "评价留言", generateUrl("https://zhuangjingyang.pagekite.me/message"));
+        ViewButton introduceButton = new ViewButton("view", "酒店概况", "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbcb7908a2a4a0cb0&redirect_uri=https%3A%2F%2Fchong.qq.com%2Fphp%2Findex.php%3Fd%3D%26c%3DwxAdapter%26m%3DmobileDeal%26showwxpaytitle%3D1%26vb2ctag%3D4_2030_5_1194_60&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
+        ViewButton joinButton = new ViewButton("view", "加入我们", "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbcb7908a2a4a0cb0&redirect_uri=https%3a%2f%2fzhuangjingyang.pagekite.me%2fmessage%3Fd%3D%26c%3DwxAdapter%26m%3DmobileDeal%26showwxpaytitle%3D1%26vb2ctag%3D4_2030_5_1194_60&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
         ViewButton contactButton = new ViewButton("view", "联系方式", "https://zhuangjingyang.pagekite.me/book");
         usButton.setSub_button(new Button[]{messageButton, introduceButton,joinButton,contactButton});
 
@@ -47,6 +50,15 @@ public class MenuInit {
         if(map!=null)
             result = (int) map.get("errcode");
         return result;
+    }
+
+
+    public static String generateUrl(String url) throws IOException{
+        String res = "https://open.weixin.qq.com/connect/oauth2/authorize?";
+        res += "appid=" + AccessTokenUtil.APPID + "&redirect_uri=" +  URLEncoder.encode(url,"utf-8") +
+                "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+        System.out.println(res);
+        return res;
     }
 
     public static void main(String[] args) throws Exception {

@@ -39,7 +39,6 @@ public class HttpClientUtil {
         HttpPost httpPost = new HttpPost(url);
         httpPost.setEntity(new StringEntity(outStr,"UTF-8"));
         try(CloseableHttpResponse response = httpClient.execute(httpPost)){
-            System.out.println(response.getStatusLine());
             HttpEntity entity = response.getEntity();
             String s = EntityUtils.toString(entity,"UTF-8");
             result = mapper.readValue(s,Map.class);
