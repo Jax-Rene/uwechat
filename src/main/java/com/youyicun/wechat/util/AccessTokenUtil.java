@@ -15,6 +15,7 @@ public class AccessTokenUtil {
     public static final String APPSECRET = "388a3fbbf105b12affb6809f4160cc51";
     public static final String CLIENT_CREDENTIAL_GET = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
     public static final String USER_INFO_ACCESS_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
+    private static final String USER_INFO_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
     public static String token = null;
     public static Long expired = 0L;
 
@@ -31,6 +32,12 @@ public class AccessTokenUtil {
 
     public static Map<String,Object> getUserInfoAccess(String code) throws IOException {
         String url = USER_INFO_ACCESS_URL.replace("APPID",APPID).replace("SECRET",APPSECRET).replace("CODE",code);
+        Map<String,Object> map = mapper.readValue(HttpClientUtil.doGet(url),Map.class);
+        return map;
+    }
+
+    public static Map<String,Object> getUserInfo(String openId) throws IOException{
+        String url = USER_INFO_URL.replace("ACCESS_TOKEN",getToken()).replace("OPENID",openId);
         Map<String,Object> map = mapper.readValue(HttpClientUtil.doGet(url),Map.class);
         return map;
     }

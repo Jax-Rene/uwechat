@@ -19,11 +19,9 @@
 
 <div class="container">
     <div class="row text-center" style="margin:40px">
-        <h1 class="main-color">留言反馈</h1>
+        <h1 class="main-color">留/言/板</h1>
         <small class="small-color">您的意见是我们最大的前进动力</small>
     </div>
-
-    <hr/>
 
     <div class="row">
         <div class="text-center">
@@ -91,7 +89,7 @@
 
         $('#submit').click(function () {
             if ($('#raty-value').val() == 0 && $('#content').val() == '') {
-                $('.weui_dialog_bd').val('如果您对我们的服务不满意,请留下您宝贵的意见!');
+                $('.weui_dialog_bd').html('如果您对我们的服务不满意,请留下您宝贵的意见!');
                 $('.weui_dialog_confirm').fadeIn(300);
             }
             else {
@@ -107,11 +105,11 @@
                                 $('#toast').fadeOut(500);
                             }, 2000);
                         } else {
-                            $('.weui_dialog_bd').val('连接超时,请稍后重试!');
+                            $('.weui_dialog_bd').html('连接超时,请稍后重试!');
                             $('.weui_dialog_confirm').fadeIn(300);
                         }
                     } else {
-                        $('.weui_dialog_bd').val('未知错误,请稍后重试!');
+                        $('.weui_dialog_bd').html('未知错误,请稍后重试!');
                         $('.weui_dialog_confirm').fadeIn(300);
                     }
                 });

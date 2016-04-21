@@ -19,7 +19,7 @@ public class MenuInit {
     public static int initMenu() throws Exception {
         Menu menu = new Menu();
         Button buyButton = new Button("微交易");
-        ViewButton bookButton = new ViewButton("view", "酒店预订", "https://zhuangjingyang.pagekite.me/book");
+        ViewButton bookButton = new ViewButton("view", "酒店预订", generateUrl("https://zhuangjingyang.pagekite.me/order"));
         ViewButton groupButton = new ViewButton("view", "团购", "https://zhuangjingyang.pagekite.me/book");
         buyButton.setSub_button(new Button[]{bookButton,groupButton});
 

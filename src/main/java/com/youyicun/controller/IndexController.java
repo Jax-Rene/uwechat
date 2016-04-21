@@ -3,7 +3,6 @@ package com.youyicun.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by johnny on 16/4/8.
@@ -22,5 +21,9 @@ public class IndexController {
     }
 
 
-
+    @RequestMapping("/order")
+    public String order(String code,Model model){
+        model.addAttribute("code",code);
+        return "order";
+    }
 }
