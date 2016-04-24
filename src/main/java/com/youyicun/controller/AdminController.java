@@ -1,13 +1,7 @@
 package com.youyicun.controller;
 
 import com.youyicun.entity.Admin;
-import com.youyicun.service.AdminService;
-import com.youyicun.service.MessageService;
-import com.youyicun.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

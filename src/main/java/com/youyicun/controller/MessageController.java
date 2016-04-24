@@ -2,16 +2,18 @@ package com.youyicun.controller;
 
 import com.youyicun.entity.Message;
 import com.youyicun.service.MessageService;
+import com.youyicun.util.DateUtil;
 import com.youyicun.wechat.util.AccessTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,7 +26,6 @@ public class MessageController {
     private MessageService messageService;
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    @ResponseBody
     public boolean submitMsg(Message message, String code) throws IOException {
         Map<String, Object> map = AccessTokenUtil.getUserInfoAccess(code);
         if (map.containsKey("errcode")) {
@@ -35,4 +36,26 @@ public class MessageController {
         messageService.submitMsg(message);
         return true;
     }
+
+    @RequestMapping(value = "/load" , method = RequestMethod.POST)
+    public Map<String,Object> load(Integer start,Integer limit){
+        Map<String,Object> map = new HashMap<>();
+        List<Message> list = messageService.load(start,limit);
+        //将时间格式化
+        for(Message s:list){
+            s.setTime(DateUtil.parseLocalDateTime(LocalDateTime.parse(s.getTime())));
+        }
+        map.put("records",list);
+        map.put("totalCount",messageService.countMsgNum());
+        map.put("avg",messageService.avgScore());
+        return map;
+    }
+
+    @RequestMapping(value = "/avg",method = RequestMethod.POST)
+    public BigDecimal avg(){
+        return messageService.avgScore();
+    }
+
+
+
 }

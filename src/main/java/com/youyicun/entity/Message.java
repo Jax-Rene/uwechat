@@ -4,6 +4,9 @@ package com.youyicun.entity;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by johnny on 16/4/10.

@@ -1,6 +1,5 @@
-import com.youyicun.dao.BaseDao;
-import com.youyicun.entity.Order;
 import com.youyicun.framework.config.AppsApplicationConfig;
+import com.youyicun.service.MessageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +15,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 public class MainTest {
     @Autowired
-    private BaseDao<Order> baseDao;
+    private MessageService messageService;
 
     @Test
     public void Test(){
-        Order order = new Order();
-        order.setLastName("庄");
-//        order.setPhone("18649713696");
-//        order.setPeople(2);
-//        order.setOpenId("abcdefghsdasdsa");
-//        order.setSex(1);
-//        order.setSuccess(0);
-        baseDao.save(order);
+        System.out.println(messageService.avgScore());
     }
 
 }
