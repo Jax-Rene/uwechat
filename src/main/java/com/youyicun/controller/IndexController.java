@@ -20,10 +20,14 @@ public class IndexController {
         return "message";
     }
 
-
     @RequestMapping("/order")
     public String order(String code,Model model){
         model.addAttribute("code",code);
         return "order";
+    }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -29,6 +31,7 @@ public class MessageController {
             return false;
         }
         message.setOpenId((String) map.get("openid"));
+        message.setTime(LocalDateTime.now().toString());
         messageService.submitMsg(message);
         return true;
     }

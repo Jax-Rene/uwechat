@@ -43,7 +43,7 @@ public class OrderController {
 
 
     public boolean validOrder(Order order){
-        if(StringUtils.isEmpty(order.getName()) || order.getName().length() > 7)
+        if(StringUtils.isEmpty(order.getLastName()) || order.getLastName().length() > 7)
             return false;
         if(order.getSex() == null)
             return false;

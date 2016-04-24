@@ -1,9 +1,12 @@
 package com.youyicun.framework.config;
 
+import com.youyicun.controller.AdminController;
+import com.youyicun.entity.Admin;
 import com.youyicun.framework.spring.SpringContextHolder;
 import com.youyicun.framework.spring.SpringContextUtils;
 import com.youyicun.framework.spring.SpringPropertyPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,6 +35,10 @@ import java.util.List;
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.youyicun"})
 public class AppsApplicationConfig {
+    @Value("${username}")
+    private String userName;
+    @Value("${password}")
+    private String passWord;
 
     @Bean
     public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
@@ -61,7 +68,7 @@ public class AppsApplicationConfig {
         configurer.setSystemPropertiesMode(PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE);
         configurer.setLocations(
                 new Resource[]{
-                        new FileSystemResource("/Users/johnny/Desktop/JobsAnalysis/analysis.properties"),
+                        new ClassPathResource("config.properties"),
                         new ClassPathResource("database.properties")
                 }
         );
@@ -80,6 +87,12 @@ public class AppsApplicationConfig {
     @Qualifier("springContextHolder")
     public SpringContextHolder contextHolder() {
         return new SpringContextHolder();
+    }
+
+    @Bean
+    public Admin admin(){
+        Admin admin = new Admin(userName,passWord);
+        return admin;
     }
 
     public static void main(String[] args) {

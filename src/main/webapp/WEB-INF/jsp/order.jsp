@@ -64,7 +64,7 @@
             <div class="weui_cells_title main-color">用餐时间</div>
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" id="order-time" type="datetime-local" value="" placeholder=""/>
+                    <input class="weui_input" id="order-time" type="datetime-local" value="" placeholder="" min="${now}"/>
                 </div>
             </div>
 
@@ -91,8 +91,11 @@
 </div>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/base.js"></script>
 <script>
     $(function () {
+        $('#order-time').val(generateNowDateTime());
+        $('#order-time').attr('min',generateNowDateTime());
         $('#submit').click(function () {
             var name = $('#name').val();
             var people = $('#people').val();
@@ -113,7 +116,7 @@
                 $('.weui_dialog_confirm').fadeIn(200);
             } else {
                 $.post('${pageContext.request.contextPath}/order/submit', {
-                    name: name,
+                    lastName: name,
                     sex: $('#sex').val(),
                     phone: phone,
                     people: people,
@@ -125,7 +128,7 @@
                             $('.weui_dialog_bd').html('提交预订请求成功,您还需要支付100元定金才能完成预订,点击确定将跳转到支付页面!');
                             $('.weui_dialog_confirm').fadeIn(200);
                         } else {
-                            $('.weui_dialog_bd').html('提交失败,请稍后重试!');
+                            $('.weui_dialog_bd').html('提交失败,请检查表单信息后重试!');
                             $('.weui_dialog_confirm').fadeIn(200);
                         }
                     } else {

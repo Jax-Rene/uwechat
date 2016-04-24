@@ -35,64 +35,105 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
+    <properties>
+        <commons-beanutils.version>1.8.3</commons-beanutils.version>
+        <java.version>1.7</java.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
+        <spring.version>4.0.7.RELEASE</spring.version>
+        <spring-security.version>3.2.4.RELEASE</spring-security.version>
+        <hibernate.version>4.2.5.Final</hibernate.version>
+        <hibernate.validation.version>5.0.1.Final</hibernate.validation.version>
+        <bonecp.version>0.8.0.RELEASE</bonecp.version>
+        <mysql.version>5.1.26</mysql.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <aspectj.version>1.8.1</aspectj.version>
+        <jackson.version>2.3.2</jackson.version>
+        <jstl.version>1.2</jstl.version>
+        <ibatis.version>2.3.4.726</ibatis.version>
+        <dna.version>1.2.2</dna.version>
+        <httpclient.version>4.3.4</httpclient.version>
+        <zk.version>3.4.6</zk.version>
+        <alibaba.fastjson.version>1.1.41</alibaba.fastjson.version>
+        <logging.version>1.2</logging.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-lang3.version>3.1</commons-lang3.version>
+        <spark.version>1.6.0</spark.version>
+        <spring-boot.version>1.1.5.RELEASE</spring-boot.version>
+        <log4j.version>2.4.1</log4j.version>
+        <dom4j.version>1.6.1</dom4j.version>
+        <xstream.version>1.4.8</xstream.version>
+    </properties>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.1.5.RELEASE</version>
+        <version>${spring-boot.version}</version>
     </parent>
 
     <dependencies>
-        <!-- log -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.13</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.4.1</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.4.1</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.4.1</version>
+            <version>${log4j.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
 
-
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
+
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
+            <version>${dom4j.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.8</version>
+            <version>${xstream.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
+            <version>${httpclient.version}</version>
         </dependency>
 
         <dependency>
@@ -103,34 +144,37 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.2.5.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.jolbox</groupId>
             <artifactId>bonecp</artifactId>
-            <version>0.8.0.RELEASE</version>
+            <version>${bonecp.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>4.0.7.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.0.7.RELEASE</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
     </dependencies>
 </project>

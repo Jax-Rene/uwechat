@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by johnny on 16/4/10.
  */
 @Entity
-@Table(name = "message")
+@Table(name = "umessage")
 @Proxy
 public class Message {
     @Id
@@ -25,12 +25,24 @@ public class Message {
     @Column(name = "open_id")
     private String openId;
 
+    @Column(name = "time")
+    private String time;
+
     public Message() {
     }
 
     public Message(Integer score, String content) {
         this.score = score;
         this.content = content;
+    }
+
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getOpenId() {
