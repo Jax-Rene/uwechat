@@ -21,6 +21,12 @@ public class Order {
     @Column(name = "sex")
     private Integer sex;
 
+    @Transient
+    private String nickName;
+
+    @Transient
+    private String call;
+
     @Column(name = "phone")
     private String phone;
 
@@ -36,6 +42,16 @@ public class Order {
     @Column(name = "success")
     private Integer success = 0; //0:失败 1:成功
 
+    @Column(name = "is_del")
+    private Integer isDel;
+
+
+    public String getCall() {
+        if(getSex() == 0)
+            return getLastName() + "先生";
+        else
+            return getLastName() + "小姐";
+    }
 
     public Integer getId() {
         return id;
@@ -102,5 +118,21 @@ public class Order {
     }
 
     public Order() {
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public Integer getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel;
     }
 }

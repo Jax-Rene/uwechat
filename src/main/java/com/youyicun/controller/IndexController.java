@@ -30,4 +30,15 @@ public class IndexController {
     public String login(){
         return "login";
     }
+
+    @RequestMapping("/admin-message")
+    public String adminMessage(){
+        return "admin-message";
+    }
+
+    @RequestMapping("/admin-order")
+    public String adminOrder(){
+        return "admin-order";
+    }
+
 }

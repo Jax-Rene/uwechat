@@ -10,3 +10,13 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size:5px;
 }
+
+.admin-block{
+    width: 1000px;
+    padding: 80px;
+    background-color: #ef4f4f;
+    display: inline;
+    opacity: .7;
+    color: white;
+    font-size: 50px;
+}

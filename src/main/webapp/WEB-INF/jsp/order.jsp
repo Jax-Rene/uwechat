@@ -90,7 +90,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/base.js"></script>
 <script>
     $(function () {

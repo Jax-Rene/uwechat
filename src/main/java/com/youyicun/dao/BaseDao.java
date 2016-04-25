@@ -81,6 +81,15 @@ public class BaseDao<T> {
         return query.list();
     }
 
+    public List<T> query(String hql, Map<String, Object> hs,int start,int limit) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(hql);
+        setQueryParam(hs, query);
+        query.setFirstResult(start);
+        query.setMaxResults(limit);
+        return query.list();
+    }
+
 
     public List<T> querySql(String hql) {
         Session session = sessionFactory.getCurrentSession();

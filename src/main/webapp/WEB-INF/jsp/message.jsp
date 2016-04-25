@@ -76,9 +76,9 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.raty.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
 <script>
     $(function () {
         $('#raty').raty({
@@ -121,5 +121,8 @@
         $('.weui_dialog_confirm').fadeOut(300);
     });
 </script>
+
+
+
 </body>
 </html>

@@ -28,6 +28,9 @@ public class Message {
     @Column(name = "open_id")
     private String openId;
 
+    @Transient
+    private String nickName;
+
     @Column(name = "time")
     private String time;
 
@@ -81,6 +84,14 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }
 
