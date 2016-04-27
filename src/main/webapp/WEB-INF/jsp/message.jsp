@@ -25,7 +25,7 @@
 
     <div class="row">
         <div class="text-center">
-            <div id="raty"></div>
+            <div id="raty" style="display: inline;"></div>
             <input type="hidden" id="raty-value"/>
         </div>
     </div>
@@ -76,13 +76,14 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
 <script>
     $(function () {
         $('#raty').raty({
             click: function (score, evt) {
+                $('#raty').val(score);
                 $('#raty-value').val(score);
             }
         });

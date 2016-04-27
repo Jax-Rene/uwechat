@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/js/jquery-1.8.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="http://g.alicdn.com/bui/seajs/2.3.0/sea.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
 <script src="http://g.alicdn.com/bui/bui/1.1.10/config.js"></script>

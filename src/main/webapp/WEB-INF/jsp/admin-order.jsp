@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<script src="${pageContext.request.contextPath}/js/jquery-1.8.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="http://g.alicdn.com/bui/seajs/2.3.0/sea.js"></script>
 <script src="http://g.alicdn.com/bui/bui/1.1.10/config.js"></script>
 <script src="http://g.alicdn.com/bui/bui/1.1.21/bui.js"></script>
@@ -164,7 +164,7 @@
         $('#today').click(function () {
             var d = new Date();
             $('#start-time').val(d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + " 00:00:00");
-            $('#end-time').val(d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
+            $('#end-time').val(d.getFullYear() + "-" + d.getMonth() + "-" + (d.getDate() + 1) + " 00:00:00");
         });
     });
 </script>

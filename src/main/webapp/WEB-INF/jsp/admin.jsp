@@ -38,7 +38,7 @@
     <a href="${pageContext.request.contextPath}/admin-order"><div class="admin-block" style="background-color: #9AB86C">订单管理</div></a>
 </div>
 
-<script src="${pageContext.request.contextPath}/js/jquery-1.8.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.backstretch.js"></script>
 <script>
     $(function () {
