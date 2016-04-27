@@ -66,30 +66,5 @@ public class OrderController {
     }
 
 
-    @RequestMapping(value = "/load", method = RequestMethod.POST)
-    public Map<String, Object> load(Integer start, Integer limit, String startTime, String endTime, String phone) throws IOException {
-        if (StringUtils.isEmpty(startTime))
-            startTime = "2000-01-01F00:00:00";
-        else
-            startTime = DateUtil.parseDateTimeToLocal(startTime);
-        if (StringUtils.isEmpty(endTime))
-            endTime = LocalDateTime.now().toString();
-        else
-            endTime = DateUtil.parseDateTimeToLocal(endTime);
-        List<Order> list = orderService.load(start, limit, startTime, endTime, phone, 1);
-        for (Order order : list) {
-            order.setOrderTime(DateUtil.parseLocalDateTime(LocalDateTime.parse(order.getOrderTime())));
-        }
-        Map<String, Object> map = new HashMap<>();
-        map.put("records", list);
-        map.put("totalCount", orderService.countMsgNum(startTime, endTime, phone, 1));
-        return map;
-    }
-
-    @RequestMapping(value = "/del", method = RequestMethod.POST)
-    public boolean del(@RequestParam("ids[]") List<Integer> ids) {
-        orderService.delOrder(ids);
-        return true;
-    }
 
 }

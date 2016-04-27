@@ -34,10 +34,11 @@
 </div>
 
 <div class="row offset7">
-    <a href="${pageContext.request.contextPath}/admin-message"><div class="admin-block">留言板</div></a>
-    <a href="${pageContext.request.contextPath}/admin-order"><div class="admin-block" style="background-color: #9AB86C">订单管理</div></a>
+    <a href="${pageContext.request.contextPath}/admin/message"><div class="admin-block">留言板</div></a>
+    <a href="${pageContext.request.contextPath}/admin/order"><div class="admin-block" style="background-color: #9AB86C">订单管理</div></a>
 </div>
 
+<a href="${pageContext.request.contextPath}/j_spring_security_logout_">登出</a>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.backstretch.js"></script>
 <script>

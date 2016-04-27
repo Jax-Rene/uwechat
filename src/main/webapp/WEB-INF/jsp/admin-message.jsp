@@ -47,7 +47,7 @@
                     {title: '留言时间', dataIndex: 'time', width: '20%'}
                 ];
 
-        $.post('${pageContext.request.contextPath}/message/avg', function (data, status) {
+        $.post('${pageContext.request.contextPath}/admin/message/avg', function (data, status) {
             if (data) {
                 $('#avg').html('<h3>总平均分: ' + data + '</h3>');
                 $('#raty').raty({
@@ -58,7 +58,7 @@
         });
 
         var store = new Store({
-                    url: '${pageContext.request.contextPath}/message/load',
+                    url: '${pageContext.request.contextPath}/admin/message/load',
                     autoLoad: true,
                     pageSize: 100,
                     proxy: {

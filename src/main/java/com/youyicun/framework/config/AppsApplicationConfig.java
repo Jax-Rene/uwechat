@@ -34,6 +34,7 @@ import java.util.List;
 @EnableAutoConfiguration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.youyicun"})
+@ImportResource("classpath:spring-security.xml")
 public class AppsApplicationConfig {
     @Value("${username}")
     private String userName;

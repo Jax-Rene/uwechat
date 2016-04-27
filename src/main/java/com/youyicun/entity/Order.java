@@ -43,7 +43,7 @@ public class Order {
     private Integer success = 0; //0:失败 1:成功
 
     @Column(name = "is_del")
-    private Integer isDel;
+    private Integer isDel = 0; //0未删除
 
 
     public String getCall() {

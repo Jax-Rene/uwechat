@@ -27,8 +27,7 @@ import java.util.Map;
 public class MessageController {
     @Autowired
     private MessageService messageService;
-    @Autowired
-    private UserCacheService userCacheService;
+
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public boolean submitMsg(Message message, String code) throws IOException {
@@ -42,30 +41,6 @@ public class MessageController {
         return true;
     }
 
-    @RequestMapping(value = "/load" , method = RequestMethod.POST)
-    public Map<String,Object> load(Integer start,Integer limit) throws IOException {
-        Map<String,Object> map = new HashMap<>();
-        List<Message> list = messageService.load(start,limit);
-        Map<String,Object> users = userCacheService.getUser();
-        for(Message s:list){
-            if(users.get(s.getOpenId()) == null) {
-                Map<String, Object> user = UserUtil.loadUserInfo(s.getOpenId());
-                s.setNickName((String) user.get("nickname"));
-            }else{
-                s.setNickName((String) ((Map<String,Object>)users.get(s.getOpenId())).get("nickname"));
-            }
-            s.setTime(DateUtil.parseLocalDateTime(LocalDateTime.parse(s.getTime())));
-        }
-        map.put("records",list);
-        map.put("totalCount",messageService.countMsgNum());
-        map.put("avg",messageService.avgScore());
-        return map;
-    }
-
-    @RequestMapping(value = "/avg",method = RequestMethod.POST)
-    public BigDecimal avg(){
-        return messageService.avgScore();
-    }
 
 
 

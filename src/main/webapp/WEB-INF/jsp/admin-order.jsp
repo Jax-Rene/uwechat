@@ -74,7 +74,7 @@
                         {title: '预订时间', dataIndex: 'orderTime', width: 400}
                     ];
             var store = new Store({
-                        url: '${pageContext.request.contextPath}/order/load',
+                        url: '${pageContext.request.contextPath}/admin/order/load',
                         autoLoad: true,
                         pageSize: 10,
                         proxy: {
@@ -142,7 +142,7 @@
                         var idList = [];
                         for (var i = 0; i < selections.length; i++)
                             idList.push(selections[i].id);
-                        $.post('${pageContext.request.contextPath}/order/del', {
+                        $.post('${pageContext.request.contextPath}/admin/order/del', {
                             ids: idList
                         }, function (data, status) {
                             if (status) {
