@@ -1,14 +1,17 @@
 package com.youyicun.util;
 
 import com.thoughtworks.xstream.XStream;
+import com.youyicun.bean.Item;
+import com.youyicun.bean.Message;
+import com.youyicun.bean.NewsMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import com.youyicun.bean.TextMessage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +39,22 @@ public class MessageUtil {
         return map;
     }
 
-    public static String textMessageToXml(TextMessage textMessage){
+    public static String messageToXml(Message message){
         XStream xStream = new XStream();
-        xStream.alias("xml",textMessage.getClass());
-        return xStream.toXML(textMessage);
+        xStream.autodetectAnnotations(true);
+        xStream.alias("xml",message.getClass());
+        return xStream.toXML(message);
+    }
+
+    public static void main(String[] args) {
+        NewsMessage s = new NewsMessage("a","b",1);
+        s.setMsgType("news");
+        List<Item> items = new ArrayList<>();
+        Item item = new Item("titile","b","c","d");
+        Item item2 = new Item("titile","b","c","d");
+        items.add(item);
+        items.add(item2);
+        s.setArticles(items);
+        System.out.println(messageToXml(s));
     }
 }

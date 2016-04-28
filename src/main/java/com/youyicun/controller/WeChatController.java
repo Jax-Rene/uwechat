@@ -1,6 +1,11 @@
 package com.youyicun.controller;
 
+import com.youyicun.bean.Item;
+import com.youyicun.bean.Message;
+import com.youyicun.bean.NewsMessage;
+import com.youyicun.util.FinalUtil;
 import com.youyicun.util.WeChatCheckUtil;
+import com.youyicun.wechat.util.AccessTokenUtil;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +16,12 @@ import com.youyicun.entity.MessageType;
 import com.youyicun.util.MessageUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.soap.Text;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,66 +48,54 @@ public class WeChatController {
         String msgType = map.get("MsgType");
         String content = map.get("Content");
         String event = map.get("Event");
-
-        //新建返回的文字消息
-        TextMessage text = new TextMessage();
-        text.setFromUserName(toUserName);
-        text.setToUserName(fromUserName);
-        text.setMsgType("text");
-        text.setCreateTime(new Date().getTime());
-
-        //关注事件
+        String res = null;
         if (event != null && event.equals("subscribe")) {
-            text.setContent("真诚地感谢您对惠安县螺城镇又一村酒店的关注！\n" +
-                    "\n" +
-                    "新浪微博：@又一村酒店\n" +
-                    "\n" +
-                    "酒店地址：福建省泉州市惠安县螺城镇霞张花园A幢\n" +
-                    "电　　话：0595-87368378\n" +
-                    "\n" +
-                    "回复以下数字获取相关信息：\n" +
-                    "\n" +
-                    "【1】- 酒店预定\n" +
-                    "【2】- 团购活动\n" +
-                    "【3】- 人员招聘\n" +
-                    "【4】- 关于wifi\n" +
-                    "【5】-酒店概况");
+            TextMessage message = new TextMessage(fromUserName,toUserName);
+            message.setContent(FinalUtil.SUBSCRIBE);
+            res = MessageUtil.messageToXml(message);
         } else {
-            //回复文本消息
             if (msgType.equals(MessageType.MESSAGE_TEXT)) {
+                NewsMessage newsMessage = new NewsMessage(fromUserName,toUserName,1);
+                TextMessage textMessage = new TextMessage(fromUserName,toUserName);
                 switch (content) {
                     case "1":
+                        textMessage.setContent("<a href=''>点击进入预订</a>");
+                        res = MessageUtil.messageToXml(textMessage);
                         break;
                     case "2":
+                        textMessage.setContent("<a href=''>点击进入团购</a>");
+                        res = MessageUtil.messageToXml(textMessage);
                         break;
                     case "3":
+                        //招聘
+                        Map<String,Object> jobMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5exywjhMjqVFO25MbySx53t0Y");
+                        res = NewsMessageToXml(newsMessage,jobMap);
                         break;
+                    //wifi
                     case "4":
+
                         break;
                     case "5":
+                        //酒店概况
+                        Map<String,Object> introduceMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5ex5X4RZnEPenuMRETp4uWpT8");
+                        res = NewsMessageToXml(newsMessage,introduceMap);
                         break;
                     default:
-                        text.setContent("回复以下数字获取相关信息：\n" +
-                                "\n" +
-                                "【1】- 酒店预定\n" +
-                                "【2】- 团购活动\n" +
-                                "【3】- 人员招聘\n" +
-                                "【4】- 关于wifi\n" +
-                                "【5】-酒店概况");
+                        textMessage.setContent(FinalUtil.DEFAULT_TEXT_MESSAGE);
+                        res = MessageUtil.messageToXml(textMessage);
                 }
-
-            } else {
-                text.setContent("回复以下数字获取相关信息：\n" +
-                        "\n" +
-                        "【1】- 酒店预定\n" +
-                        "【2】- 团购活动\n" +
-                        "【3】- 人员招聘\n" +
-                        "【4】- 关于wifi\n" +
-                        "【5】-酒店概况");
             }
         }
-        String message = MessageUtil.textMessageToXml(text);
-        return message;
+        return res;
     }
 
+    public String NewsMessageToXml(NewsMessage message,Map<String,Object> map){
+        map = ((List<Map<String, Object>>) map.get("news_item")).get(0);
+        Item item = new Item((String)map.get("title"),(String)map.get("digest"),(String)map
+                .get("thumb_url"),(String)map.get("url"));
+        List<Item> list = new ArrayList<>();
+        list.add(item);
+        message.setArticles(list);
+        return MessageUtil.messageToXml(message);
+    }
 }
