@@ -22,9 +22,6 @@ public class Order {
     private Integer sex;
 
     @Transient
-    private String nickName;
-
-    @Transient
     private String call;
 
     @Column(name = "phone")
@@ -35,6 +32,9 @@ public class Order {
 
     @Column(name = "order_time")
     private String orderTime;
+
+    @Column(name = "remark")
+    private String remark;
 
     @Column(name = "open_id")
     private String openId;
@@ -120,19 +120,19 @@ public class Order {
     public Order() {
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     public Integer getIsDel() {
         return isDel;
     }
 
     public void setIsDel(Integer isDel) {
         this.isDel = isDel;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

@@ -24,3 +24,14 @@ function generateNowDateTime() {
     var sec = pad(d.getSeconds());
     return year + "-" + month + "-" + day + "T" + hour + ":" + min + ":" + sec;
 }
+
+
+/**
+ * 转换 标准日期到DateTimeLocal
+ * @param date 字符串
+ * @return String DateTimeLocal字符串
+ */
+function translateToDateTimeLocal(date) {
+    var d = new Date(date);
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-"  + pad(d.getDate()) + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+}

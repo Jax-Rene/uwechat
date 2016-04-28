@@ -6,6 +6,8 @@ import com.youyicun.service.MessageService;
 import com.youyicun.service.OrderService;
 import com.youyicun.service.UserCacheService;
 import com.youyicun.util.DateUtil;
+import com.youyicun.util.ValidUtil;
+import com.youyicun.wechat.util.AccessTokenUtil;
 import com.youyicun.wechat.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -101,4 +105,18 @@ public class AdminController {
         orderService.delOrder(ids);
         return true;
     }
+
+    @RequestMapping(value = "/order/add")
+    @ResponseBody
+    public String submitOrder(Order order) throws IOException {
+        String valid = ValidUtil.validOrder(order);
+        if (valid != null)
+            return valid;
+        order.setOpenId("admin");
+        //判断是否success为以后扩展做准备
+        order.setSuccess(1);
+        orderService.submitOrder(order);
+        return "success";
+    }
+
 }

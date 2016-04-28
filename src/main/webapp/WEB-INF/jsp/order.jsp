@@ -36,8 +36,8 @@
                 </div>
                 <div class="weui_cell_hd">
                     <select class="weui_select" name="select2" id="sex">
-                        <option value="1">先生</option>
-                        <option value="2">小姐</option>
+                        <option value="0">先生</option>
+                        <option value="1">小姐</option>
                     </select>
                 </div>
             </div>
@@ -68,15 +68,23 @@
                 </div>
             </div>
 
+
+            <div class="weui_cells_title main-color">备注信息</div>
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_textarea" id="remark" placeholder="请输入备注信息(选填)"/>
+                </div>
+            </div>
+
             <div class="weui_cells_tips main-color text-center" style="margin:20px;"><a href="#">如果有任何疑问请点击此处联系我们</a>
             </div>
             <div class="weui_btn_area">
                 <a class="weui_btn weui_btn_primary" href="javascript:" id="submit">提交</a>
             </div>
-
             <input id="code" type="hidden" value="${code}"/>
         </div>
     </div>
+    <div style="height: 50px;"></div>
 </div>
 
 <div class="weui_dialog_confirm" style="display: none;">
@@ -121,7 +129,8 @@
                     phone: phone,
                     people: people,
                     orderTime: orderTime,
-                    code: $('#code').val()
+                    code: $('#code').val(),
+                    remark:$('#remark').val()
                 }, function (data, status) {
                     if (status) {
                         if (data == 'success') {
