@@ -13,7 +13,7 @@
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
     <link href="http://g.alicdn.com/bui/bui/1.1.21/css/bs3/bui.css" rel="stylesheet">
     <link href="http://g.alicdn.com/bui/bui/1.1.21/css/bs3/dpl.css" rel="stylesheet">
-
+    <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
     <style>
         h1{
             color: #FFFFFF;
@@ -27,6 +27,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="head.jsp"></jsp:include>
 <h1 id="time"></h1>
 
 <div class="row">
@@ -38,7 +39,7 @@
     <a href="${pageContext.request.contextPath}/admin/order"><div class="admin-block" style="background-color: #9AB86C">订单管理</div></a>
 </div>
 
-<a href="${pageContext.request.contextPath}/j_spring_security_logout_">登出</a>
+
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery.backstretch.js"></script>
 <script>

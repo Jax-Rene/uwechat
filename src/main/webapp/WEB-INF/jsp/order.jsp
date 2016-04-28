@@ -124,15 +124,15 @@
                     code: $('#code').val()
                 }, function (data, status) {
                     if (status) {
-                        if (data) {
-                            $('.weui_dialog_bd').html('提交预订请求成功,您还需要支付100元定金才能完成预订,点击确定将跳转到支付页面!');
+                        if (data == 'success') {
+                            $('.weui_dialog_bd').html('提交订单成功,请务必于预订时间到酒楼用餐!');
                             $('.weui_dialog_confirm').fadeIn(200);
                         } else {
-                            $('.weui_dialog_bd').html('提交失败,请检查表单信息后重试!');
+                            $('.weui_dialog_bd').html(data);
                             $('.weui_dialog_confirm').fadeIn(200);
                         }
                     } else {
-                        $('.weui_dialog_bd').html('未知错误,请稍后重试!');
+                        $('.weui_dialog_bd').html('连接超市,请稍后重试!');
                         $('.weui_dialog_confirm').fadeIn(200);
                     }
                 });

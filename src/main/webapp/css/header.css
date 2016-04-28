@@ -1,0 +1,65 @@
+header {
+    font: 400 1em ubuntu;
+    height: 50px;
+    font-weight: 500;
+    box-shadow: 0 -1px 8px #111111;
+    border-top: 1px solid #333333;
+    background-color: #eff2f4;
+    background-image: -moz-linear-gradient(top, #f3f7fa, #eaeaea);
+    background-image: -ms-linear-gradient(top, #f3f7fa, #eaeaea);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f3f7fa), to(#eaeaea));
+    background-image: -webkit-linear-gradient(top, #f3f7fa, #eaeaea);
+    background-image: -o-linear-gradient(top, #f3f7fa, #eaeaea);
+    background-image: linear-gradient(top, #f3f7fa, #eaeaea);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f3f7fa', endColorstr='#eaeaea', GradientType=0);
+}
+
+header a {
+    text-decoration: none;
+}
+
+header a.brand {
+    float: left;
+    color: #333333;
+    line-height: 50px;
+    font-size: .9em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0 23px;
+    border-right: 1px solid #b8b9ba;
+}
+
+header a.brand:hover,
+header a.brand:active {
+    color: #ffffff;
+    background-color: #78B386;
+}
+
+header ul {
+    float: left;
+    border-right: 1px solid #ffffff;
+    list-style: none;
+    text-transform: uppercase;
+}
+
+header ul li {
+    float: left;
+    border-right: 1px solid #b8b9ba;
+    font-size: .75em;
+    font-weight: 600;
+}
+
+header ul li a {
+    display: block;
+    border-left: 1px solid #ffffff;
+    color: #333333;
+    padding: 0 23px;
+    line-height: 50px;
+}
+
+header ul li a:hover,
+header ul li a:active {
+    color: #78B386;
+    background-color: #fcfcfc;
+}

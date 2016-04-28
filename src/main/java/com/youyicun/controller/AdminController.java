@@ -67,7 +67,7 @@ public class AdminController {
         return map;
     }
 
-    @RequestMapping(value = "/avg",method = RequestMethod.POST)
+    @RequestMapping(value = "/message/avg",method = RequestMethod.POST)
     @ResponseBody
     public BigDecimal avg(){
         return messageService.avgScore();
@@ -82,7 +82,7 @@ public class AdminController {
         else
             startTime = DateUtil.parseDateTimeToLocal(startTime);
         if (StringUtils.isEmpty(endTime))
-            endTime = LocalDateTime.now().toString();
+            endTime = LocalDateTime.now().plusYears(1000).toString();
         else
             endTime = DateUtil.parseDateTimeToLocal(endTime);
         List<Order> list = orderService.load(start, limit, startTime, endTime, phone, 1);

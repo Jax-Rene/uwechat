@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: johnny
@@ -13,9 +14,22 @@
     <link href="http://g.alicdn.com/bui/bui/1.1.21/css/bs3/dpl.css" rel="stylesheet">
     <link href="http://g.alicdn.com/bui/bui/1.1.21/css/bs3/bui.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/jquery.raty.css" rel="stylesheet">
 </head>
 <body>
+
+<c:import url="head.jsp"></c:import>
 <div>
+    <div class="row">
+        <div style="height: 60px;"></div>
+    </div>
+
+    <div class="row text-center">
+        <h1 class="main-color" style="font-size: 55px;">留/言/板</h1>
+        <span>Message Board</span>
+    </div>
+
     <div class="row">
         <div>
             <div class="text-center" style="padding: 20px;">
@@ -30,7 +44,7 @@
 
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="http://g.alicdn.com/bui/seajs/2.3.0/sea.js"></script>
-<script src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.raty.js"></script>
 <script src="http://g.alicdn.com/bui/bui/1.1.10/config.js"></script>
 <script src="http://g.alicdn.com/bui/bui/1.1.21/bui.js"></script>
 
@@ -51,9 +65,9 @@
             if (data) {
                 $('#avg').html('<h3>总平均分: ' + data + '</h3>');
                 $('#raty').raty({
-                    showHalf: true,
-                    start: data
+                    starType: 'i',
                 });
+                $('#raty').raty('score',data);
             }
         });
 

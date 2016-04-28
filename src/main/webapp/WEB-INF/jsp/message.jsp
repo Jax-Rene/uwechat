@@ -14,6 +14,7 @@
     <link href="${pageContext.request.contextPath}/css/weui.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/jquery.raty.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -78,14 +79,15 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.raty.js"></script>
 <script>
     $(function () {
         $('#raty').raty({
             click: function (score, evt) {
-                $('#raty').val(score);
+                $('#raty').raty('score', score);
                 $('#raty-value').val(score);
-            }
+            },
+            starType: 'i'
         });
 
         $('#submit').click(function () {
@@ -122,7 +124,6 @@
         $('.weui_dialog_confirm').fadeOut(300);
     });
 </script>
-
 
 
 </body>

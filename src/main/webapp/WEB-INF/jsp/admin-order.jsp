@@ -13,15 +13,15 @@
     <link href="http://g.alicdn.com/bui/bui/1.1.21/css/bs3/dpl.css" rel="stylesheet">
     <link href="http://g.alicdn.com/bui/bui/1.1.21/css/bs3/bui.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/header.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="head.jsp"></jsp:include>
 <div>
     <div class="row text-center">
         <div class="row">
             <div class="doc-content">
-                <form class="form-panel" action="post">
-                    <div class="panel-title">
-                    </div>
+                <form class="form-panel" action="post" style="background-color: #FFFFFF">
                     <ul class="panel-content">
                         <li>
                             <span>
@@ -76,7 +76,7 @@
             var store = new Store({
                         url: '${pageContext.request.contextPath}/admin/order/load',
                         autoLoad: true,
-                        pageSize: 10,
+                        pageSize: 100,
                         proxy: {
                             ajaxOptions: { //ajax的配置项，不要覆盖success,和error方法
                                 traditional: true,
