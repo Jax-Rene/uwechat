@@ -64,7 +64,7 @@ public class CryptoUtil {
     }
 
     public static void main(String[] args) throws Exception{
-        byte[] bytes = doAes("".getBytes(),1);
+        byte[] bytes = doAes("5e9ab3610573445a9375e4733a7362f9".getBytes(),1);
         String before = parseByte2HexStr(bytes);
         System.out.println("加密前:" + before);
         String after = decryptApi(before);
@@ -86,5 +86,6 @@ public class CryptoUtil {
         }
         return sb.toString();
     }
-    
+
+
 }

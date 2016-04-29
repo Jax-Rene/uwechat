@@ -37,7 +37,7 @@
                 <div class="weui_cell_hd">
                     <select class="weui_select" name="select2" id="sex">
                         <option value="0">先生</option>
-                        <option value="1">小姐</option>
+                        <option value="1">女士</option>
                     </select>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="weui_cells_tips main-color text-center" style="margin:20px;"><a href="#">如果有任何疑问请点击此处联系我们</a>
+            <div class="weui_cells_tips main-color text-center" style="margin:20px;"><a href="http://mp.weixin.qq.com/s?__biz=MzI4OTIyMjIzNw==&mid=100000010&idx=1&sn=dc74d2a02d8823a2880bba59a33e1a50#rd"">如果有任何疑问请点击此处联系我们</a>
             </div>
             <div class="weui_btn_area">
                 <a class="weui_btn weui_btn_primary" href="javascript:" id="submit">提交</a>

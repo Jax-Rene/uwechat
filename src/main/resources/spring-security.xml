@@ -13,7 +13,7 @@
         <intercept-url pattern="/**" access="permitAll"/>
         <form-login login-processing-url="/spring_security_login" login-page="/login"
                     authentication-failure-url="/login?error=true"/>
-        <logout invalidate-session="true" logout-success-url="/login"
+        <logout invalidate-session="true" logout-success-url="/admin"
                 logout-url="/j_spring_security_logout_"/>
     </http>
 

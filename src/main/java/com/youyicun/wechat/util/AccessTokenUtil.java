@@ -69,6 +69,6 @@ public class AccessTokenUtil {
     }
 
     public static void main(String[] args) throws  Exception{
-        getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5ex5X4RZnEPenuMRETp4uWpT8");
+        listAllMaterial("news",0,10);
     }
 }

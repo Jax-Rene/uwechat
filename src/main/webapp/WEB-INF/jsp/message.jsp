@@ -102,17 +102,17 @@
                     code: $('#code').val()
                 }, function (data, status) {
                     if (status) {
-                        if (data) {
+                        if (data == 'success') {
                             $('#toast').fadeIn(500);
                             window.setTimeout(function () {
                                 $('#toast').fadeOut(500);
                             }, 2000);
                         } else {
-                            $('.weui_dialog_bd').html('连接超时,请稍后重试!');
+                            $('.weui_dialog_bd').html(data);
                             $('.weui_dialog_confirm').fadeIn(300);
                         }
                     } else {
-                        $('.weui_dialog_bd').html('未知错误,请稍后重试!');
+                        $('.weui_dialog_bd').html('连接超时,请稍后重试!');
                         $('.weui_dialog_confirm').fadeIn(300);
                     }
                 });

@@ -1,6 +1,5 @@
 package com.youyicun.framework.config;
 
-import com.youyicun.controller.AdminController;
 import com.youyicun.entity.Admin;
 import com.youyicun.framework.spring.SpringContextHolder;
 import com.youyicun.framework.spring.SpringContextUtils;
@@ -12,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;

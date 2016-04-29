@@ -41,6 +41,7 @@ public class WeChatController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String receivceMsg(HttpServletRequest request) throws IOException {
+
         InputStream inputStream = request.getInputStream();
         Map<String, String> map = MessageUtil.xmlToMap(inputStream);
         String fromUserName = map.get("FromUserName");
@@ -49,17 +50,40 @@ public class WeChatController {
         String content = map.get("Content");
         String event = map.get("Event");
         String res = null;
-        if (event != null && event.equals("subscribe")) {
-            TextMessage message = new TextMessage(fromUserName,toUserName);
-            message.setContent(FinalUtil.SUBSCRIBE);
-            res = MessageUtil.messageToXml(message);
+        if (event != null) {
+            NewsMessage newsMessage = new NewsMessage(fromUserName, toUserName, 1);
+            TextMessage message = new TextMessage(fromUserName, toUserName);
+            switch (event) {
+                case "subscribe":
+                    message.setContent(FinalUtil.SUBSCRIBE);
+                    res = MessageUtil.messageToXml(message);
+                    break;
+                case "CLICK":
+                    String eventKey = map.get("EventKey");
+                    Map<String,Object> clickMap = null;
+                    switch (eventKey) {
+                        case "join":
+                            clickMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5exywjhMjqVFO25MbySx53t0Y");
+                            break;
+                        case "introduce":
+                            clickMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5ex5X4RZnEPenuMRETp4uWpT8");
+                            break;
+                        case "specialOffer":
+                            clickMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5ex9Oq6riCU3CDV0pe2Vzrvgk");
+                            break;
+                        case "lastVeg":
+                            clickMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5ex9B_pXhRVERTtra_RNcBjd4");
+                            break;
+                    }
+                    res = NewsMessageToXml(newsMessage, clickMap);
+            }
         } else {
             if (msgType.equals(MessageType.MESSAGE_TEXT)) {
-                NewsMessage newsMessage = new NewsMessage(fromUserName,toUserName,1);
-                TextMessage textMessage = new TextMessage(fromUserName,toUserName);
+                NewsMessage newsMessage = new NewsMessage(fromUserName, toUserName, 1);
+                TextMessage textMessage = new TextMessage(fromUserName, toUserName);
                 switch (content) {
                     case "1":
-                        textMessage.setContent("<a href=''>点击进入预订</a>");
+                        textMessage.setContent("<a href='" + FinalUtil.ABSOLUTEPATH + "/order" + "'>点击进入预订</a>");
                         res = MessageUtil.messageToXml(textMessage);
                         break;
                     case "2":
@@ -68,17 +92,18 @@ public class WeChatController {
                         break;
                     case "3":
                         //招聘
-                        Map<String,Object> jobMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5exywjhMjqVFO25MbySx53t0Y");
-                        res = NewsMessageToXml(newsMessage,jobMap);
+                        Map<String, Object> jobMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5exywjhMjqVFO25MbySx53t0Y");
+                        res = NewsMessageToXml(newsMessage, jobMap);
                         break;
                     //wifi
                     case "4":
-
+                        textMessage.setContent(FinalUtil.WIFI);
+                        res = MessageUtil.messageToXml(textMessage);
                         break;
                     case "5":
                         //酒店概况
-                        Map<String,Object> introduceMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5ex5X4RZnEPenuMRETp4uWpT8");
-                        res = NewsMessageToXml(newsMessage,introduceMap);
+                        Map<String, Object> introduceMap = AccessTokenUtil.getPermanentMaterial("AL6iOzTbWiY_Z0tAnv5ex5X4RZnEPenuMRETp4uWpT8");
+                        res = NewsMessageToXml(newsMessage, introduceMap);
                         break;
                     default:
                         textMessage.setContent(FinalUtil.DEFAULT_TEXT_MESSAGE);
@@ -89,10 +114,11 @@ public class WeChatController {
         return res;
     }
 
-    public String NewsMessageToXml(NewsMessage message,Map<String,Object> map){
+
+    public String NewsMessageToXml(NewsMessage message, Map<String, Object> map) {
         map = ((List<Map<String, Object>>) map.get("news_item")).get(0);
-        Item item = new Item((String)map.get("title"),(String)map.get("digest"),(String)map
-                .get("thumb_url"),(String)map.get("url"));
+        Item item = new Item((String) map.get("title"), (String) map.get("digest"), (String) map
+                .get("thumb_url"), (String) map.get("url"));
         List<Item> list = new ArrayList<>();
         list.add(item);
         message.setArticles(list);

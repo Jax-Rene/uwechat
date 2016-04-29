@@ -50,7 +50,7 @@ public class Order {
         if(getSex() == 0)
             return getLastName() + "先生";
         else
-            return getLastName() + "小姐";
+            return getLastName() + "女士";
     }
 
     public Integer getId() {

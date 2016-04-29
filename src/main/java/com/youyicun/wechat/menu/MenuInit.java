@@ -1,6 +1,7 @@
 package com.youyicun.wechat.menu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.youyicun.util.FinalUtil;
 import com.youyicun.wechat.util.AccessTokenUtil;
 import com.youyicun.wechat.util.HttpClientUtil;
 
@@ -18,25 +19,23 @@ public class MenuInit {
 
     public static int initMenu() throws Exception {
         Menu menu = new Menu();
-        Button buyButton = new Button("微交易");
-        ViewButton bookButton = new ViewButton("view", "酒店预订", generateUrl("https://zhuangjingyang.pagekite.me/order"));
-        ViewButton groupButton = new ViewButton("view", "团购", "https://zhuangjingyang.pagekite.me/book");
+        Button buyButton = new Button("订购");
+        ViewButton bookButton = new ViewButton("view", "酒店预订", generateUrl(FinalUtil.ABSOLUTEPATH + "/order"));
+        ViewButton groupButton = new ViewButton("view", "团购", generateUrl(FinalUtil.ABSOLUTEPATH + "/order"));
         buyButton.setSub_button(new Button[]{bookButton,groupButton});
 
-        Button freeButton = new Button("优惠便捷");
-        ViewButton freeActiveButton = new ViewButton("view", "优惠活动", "https://zhuangjingyang.pagekite.me/book");
-        ViewButton wifiButton = new ViewButton("view", "一键上网", "https://zhuangjingyang.pagekite.me/book");
-        ViewButton vegButton = new ViewButton("view", "最新菜品", "https://zhuangjingyang.pagekite.me/book");
-        freeButton.setSub_button(new Button[]{freeActiveButton,wifiButton,vegButton});
+        ClickButton freeActiveButton = new ClickButton("click","优惠活动","specialOffer");
 
-        Button usButton = new Button("联系我们");
-        ViewButton messageButton = new ViewButton("view", "评价留言", generateUrl("https://zhuangjingyang.pagekite.me/message"));
-        ViewButton introduceButton = new ViewButton("view", "酒店概况", "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbcb7908a2a4a0cb0&redirect_uri=https%3A%2F%2Fchong.qq.com%2Fphp%2Findex.php%3Fd%3D%26c%3DwxAdapter%26m%3DmobileDeal%26showwxpaytitle%3D1%26vb2ctag%3D4_2030_5_1194_60&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
-        ViewButton joinButton = new ViewButton("view", "加入我们", "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbcb7908a2a4a0cb0&redirect_uri=https%3a%2f%2fzhuangjingyang.pagekite.me%2fmessage%3Fd%3D%26c%3DwxAdapter%26m%3DmobileDeal%26showwxpaytitle%3D1%26vb2ctag%3D4_2030_5_1194_60&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
-        ViewButton contactButton = new ViewButton("view", "联系方式", "https://zhuangjingyang.pagekite.me/book");
-        usButton.setSub_button(new Button[]{messageButton, introduceButton,joinButton,contactButton});
 
-        menu.setButton(new Button[]{buyButton,freeButton,usButton});
+        Button usButton = new Button("资讯");
+        ViewButton messageButton = new ViewButton("view", "评价留言", generateUrl(FinalUtil.ABSOLUTEPATH + "/message"));
+        ClickButton vegButton = new ClickButton("click", "最新菜品", "lastVeg");
+        ClickButton introduceButton = new ClickButton("click", "酒店概况", "introduce");
+        ClickButton joinButton = new ClickButton("click", "求职招聘", "join");
+        ViewButton contactButton = new ViewButton("view", "联系我们", "http://mp.weixin.qq.com/s?__biz=MzI4OTIyMjIzNw==&mid=100000010&idx=1&sn=dc74d2a02d8823a2880bba59a33e1a50#rd");
+        usButton.setSub_button(new Button[]{messageButton, vegButton,introduceButton,joinButton,contactButton});
+
+        menu.setButton(new Button[]{buyButton,freeActiveButton,usButton});
         StringWriter stringWriter = new StringWriter();
         mapper.writeValue(stringWriter, menu);
         return createMenu(stringWriter.toString());

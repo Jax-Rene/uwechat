@@ -30,15 +30,15 @@ public class MessageController {
 
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public boolean submitMsg(Message message, String code) throws IOException {
+    public String submitMsg(Message message, String code) throws IOException {
         Map<String, Object> map = AccessTokenUtil.getUserInfoAccess(code);
         if (map.containsKey("errcode")) {
-            return false;
+            return "请勿重复提交!";
         }
         message.setOpenId((String) map.get("openid"));
         message.setTime(LocalDateTime.now().toString());
         messageService.submitMsg(message);
-        return true;
+        return "success";
     }
 
 
