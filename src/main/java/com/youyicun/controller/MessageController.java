@@ -2,10 +2,13 @@ package com.youyicun.controller;
 
 import com.youyicun.entity.Message;
 import com.youyicun.service.MessageService;
+import com.youyicun.service.OrderService;
 import com.youyicun.service.UserCacheService;
 import com.youyicun.util.DateUtil;
 import com.youyicun.wechat.util.AccessTokenUtil;
 import com.youyicun.wechat.util.UserUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/message")
 public class MessageController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
     @Autowired
     private MessageService messageService;
 
@@ -33,11 +37,12 @@ public class MessageController {
     public String submitMsg(Message message, String code) throws IOException {
         Map<String, Object> map = AccessTokenUtil.getUserInfoAccess(code);
         if (map.containsKey("errcode")) {
-            return "请勿重复提交!";
+            return "您已提交成功,请勿重复提交!";
         }
         message.setOpenId((String) map.get("openid"));
         message.setTime(LocalDateTime.now().toString());
         messageService.submitMsg(message);
+        LOGGER.info("提交消息成功消息id为: " + message.getId());
         return "success";
     }
 

@@ -33,6 +33,7 @@ public class FinalUtil {
             "祝您用餐愉快!";
 
 
+//    public static final String ABSOLUTEPATH = "https://zhuangjingyang.pagekite.me";
     public static final String ABSOLUTEPATH = "https://youyicun.duapp.com/uwechat";
 
 }

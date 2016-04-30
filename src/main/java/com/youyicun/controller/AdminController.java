@@ -9,6 +9,8 @@ import com.youyicun.util.DateUtil;
 import com.youyicun.util.ValidUtil;
 import com.youyicun.wechat.util.AccessTokenUtil;
 import com.youyicun.wechat.util.UserUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -33,6 +35,7 @@ import java.util.regex.Pattern;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
     @Autowired
     private MessageService messageService;
     @Autowired
@@ -50,30 +53,31 @@ public class AdminController {
         return "admin-order";
     }
 
-    @RequestMapping(value = "/message/load" , method = RequestMethod.POST)
+    @RequestMapping(value = "/message/load", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> load(Integer start, Integer limit) throws IOException {
-        Map<String,Object> map = new HashMap<>();
-        List<Message> list = messageService.load(start,limit);
-        Map<String,Object> users = userCacheService.getUser();
-        for(Message s:list){
-            if(users.get(s.getOpenId()) == null) {
+    public Map<String, Object> load(Integer start, Integer limit) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        List<Message> list = messageService.load(start, limit);
+        Map<String, Object> users = userCacheService.getUser();
+        for (Message s : list) {
+            if (users.get(s.getOpenId()) == null) {
                 Map<String, Object> user = UserUtil.loadUserInfo(s.getOpenId());
                 s.setNickName((String) user.get("nickname"));
-            }else{
-                s.setNickName((String) ((Map<String,Object>)users.get(s.getOpenId())).get("nickname"));
+            } else {
+                s.setNickName((String) ((Map<String, Object>) users.get(s.getOpenId())).get("nickname"));
             }
             s.setTime(DateUtil.parseLocalDateTime(LocalDateTime.parse(s.getTime())));
         }
-        map.put("records",list);
-        map.put("totalCount",messageService.countMsgNum());
-        map.put("avg",messageService.avgScore());
+        map.put("records", list);
+        map.put("totalCount", messageService.countMsgNum());
+        map.put("avg", messageService.avgScore());
+        LOGGER.info("后台加载消息数据成功!");
         return map;
     }
 
-    @RequestMapping(value = "/message/avg",method = RequestMethod.POST)
+    @RequestMapping(value = "/message/avg", method = RequestMethod.POST)
     @ResponseBody
-    public BigDecimal avg(){
+    public BigDecimal avg() {
         return messageService.avgScore();
     }
 
@@ -96,6 +100,7 @@ public class AdminController {
         Map<String, Object> map = new HashMap<>();
         map.put("records", list);
         map.put("totalCount", orderService.countMsgNum(startTime, endTime, phone, 1));
+        LOGGER.info("后台加载订单数据成功!");
         return map;
     }
 
@@ -103,6 +108,7 @@ public class AdminController {
     @ResponseBody
     public boolean del(@RequestParam("ids[]") List<Integer> ids) {
         orderService.delOrder(ids);
+        LOGGER.info("删除数据成功");
         return true;
     }
 
@@ -116,6 +122,7 @@ public class AdminController {
         //判断是否success为以后扩展做准备
         order.setSuccess(1);
         orderService.submitOrder(order);
+        LOGGER.info("添加数据成功");
         return "success";
     }
 

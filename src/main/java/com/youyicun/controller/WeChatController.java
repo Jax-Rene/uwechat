@@ -3,9 +3,12 @@ package com.youyicun.controller;
 import com.youyicun.bean.Item;
 import com.youyicun.bean.Message;
 import com.youyicun.bean.NewsMessage;
+import com.youyicun.framework.config.CryptoUtil;
 import com.youyicun.util.FinalUtil;
 import com.youyicun.util.WeChatCheckUtil;
 import com.youyicun.wechat.util.AccessTokenUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +32,8 @@ import java.util.Map;
  */
 @Controller
 public class WeChatController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(WeChatController.class);
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public String valid(String signature, String timestamp, String nonce, String echostr) {
@@ -41,7 +46,6 @@ public class WeChatController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String receivceMsg(HttpServletRequest request) throws IOException {
-
         InputStream inputStream = request.getInputStream();
         Map<String, String> map = MessageUtil.xmlToMap(inputStream);
         String fromUserName = map.get("FromUserName");
@@ -111,6 +115,7 @@ public class WeChatController {
                 }
             }
         }
+        LOGGER.info("返回的消息为: " + res);
         return res;
     }
 
