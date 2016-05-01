@@ -71,7 +71,7 @@ public class AdminController {
         map.put("records", list);
         map.put("totalCount", messageService.countMsgNum());
         map.put("avg", messageService.avgScore());
-        LOGGER.info("后台加载消息数据成功!");
+        LOGGER.info("load message data successfully!");
         return map;
     }
 
@@ -100,7 +100,7 @@ public class AdminController {
         Map<String, Object> map = new HashMap<>();
         map.put("records", list);
         map.put("totalCount", orderService.countMsgNum(startTime, endTime, phone, 1));
-        LOGGER.info("后台加载订单数据成功!");
+        LOGGER.info("load order data successfully!");
         return map;
     }
 
@@ -108,7 +108,7 @@ public class AdminController {
     @ResponseBody
     public boolean del(@RequestParam("ids[]") List<Integer> ids) {
         orderService.delOrder(ids);
-        LOGGER.info("删除数据成功");
+        LOGGER.info("delete order successfully");
         return true;
     }
 
@@ -122,7 +122,7 @@ public class AdminController {
         //判断是否success为以后扩展做准备
         order.setSuccess(1);
         orderService.submitOrder(order);
-        LOGGER.info("添加数据成功");
+        LOGGER.info("add order successfully");
         return "success";
     }
 

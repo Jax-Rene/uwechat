@@ -34,7 +34,7 @@ public class OrderController {
         //判断是否success为以后扩展做准备
         order.setSuccess(1);
         orderService.submitOrder(order);
-        LOGGER.info("插入订单成功,订单id为: " + order.getId());
+        LOGGER.info("add order successfully id: " + order.getId());
         return "success";
     }
 }

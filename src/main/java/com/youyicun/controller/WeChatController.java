@@ -115,7 +115,7 @@ public class WeChatController {
                 }
             }
         }
-        LOGGER.info("返回的消息为: " + res);
+        LOGGER.info("message return res: " + res);
         return res;
     }
 

@@ -42,7 +42,7 @@ public class MessageController {
         message.setOpenId((String) map.get("openid"));
         message.setTime(LocalDateTime.now().toString());
         messageService.submitMsg(message);
-        LOGGER.info("提交消息成功消息id为: " + message.getId());
+        LOGGER.info("commit message to database successfully id : " + message.getId());
         return "success";
     }
 
