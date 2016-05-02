@@ -45,8 +45,4 @@ public class MessageController {
         LOGGER.info("commit message to database successfully id : " + message.getId());
         return "success";
     }
-
-
-
-
 }

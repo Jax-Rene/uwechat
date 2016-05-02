@@ -28,7 +28,7 @@ public class OrderController {
             return valid;
         Map<String, Object> map = AccessTokenUtil.getUserInfoAccess(code);
         if (map.containsKey("errcode")) {
-            return "您已提交成功,请勿重复提交ntro!";
+            return "您已提交成功,请勿重复提交!";
         }
         order.setOpenId((String) map.get("openid"));
         //判断是否success为以后扩展做准备
