@@ -13,8 +13,13 @@ import java.util.Map;
  */
 public class AccessTokenUtil {
     public static ObjectMapper mapper = new ObjectMapper();
+    //线上
     public static final String APPID = "wxbcb7908a2a4a0cb0";
     public static final String APPSECRET = "388a3fbbf105b12affb6809f4160cc51";
+
+    //测试
+//    public static final String APPID = "wxfcb36acfc91399b9";
+//    public static final String APPSECRET = "83605d826fd687c8468fe17750891fb7";
     public static final String CLIENT_CREDENTIAL_GET = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
     public static final String USER_INFO_ACCESS_URL = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
     private static final String USER_INFO_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";

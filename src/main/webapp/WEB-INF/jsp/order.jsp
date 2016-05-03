@@ -98,6 +98,29 @@
     </div>
 </div>
 
+
+<div id="loadingToast" class="weui_loading_toast" style="display:none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <div class="weui_loading">
+            <!-- :) -->
+            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+        </div>
+        <p class="weui_toast_content">提交中</p>
+    </div>
+</div>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/base.js"></script>
 <script>
@@ -123,6 +146,7 @@
                 $('.weui_dialog_bd').html('您输入的用餐时间有误,请重新输入!');
                 $('.weui_dialog_confirm').fadeIn(200);
             } else {
+                $('#loadingToast').fadeIn(500);
                 $.post('${pageContext.request.contextPath}/order/submit', {
                     lastName: name,
                     sex: $('#sex').val(),
@@ -132,6 +156,7 @@
                     code: $('#code').val(),
                     remark:$('#remark').val()
                 }, function (data, status) {
+                    $('#loadingToast').fadeOut();
                     if (status) {
                         if (data == 'success') {
                             $('.weui_dialog_bd').html('提交订单成功,请务必于预订时间到酒楼用餐!');
